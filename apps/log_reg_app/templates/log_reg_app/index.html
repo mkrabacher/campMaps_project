@@ -1,0 +1,42 @@
+<html>
+    <head></head>
+    <body>
+        {% if 'user' in request.session %}
+        <form action="/process_logout/" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="Logout">
+        </form>
+        {% endif %}
+        {% if messages %}
+        <ul class="messages" style="margin:10px 0 0 5%; padding-left:15px;">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <form action="/process_reg/" method="POST" style="display:inline-block;vertical-align:top;border:1px solid black;padding:0 18px 18px 18px;">
+            {% csrf_token%}
+            <h3>Register</h3>
+            <label for="name">Name:</label><br>
+            <input type="text" name="name"><br>
+            <label for="username">Username:</label><br>
+            <input type="text" name="username"><br>
+            <label for="email">Email</label><br>
+            <input type="text" name="email"><br>
+            <label for="password">Password</label><br>
+            <input type="password" name="password"><br>
+            <label for="r_password">Confirm Password:</label><br>
+            <input type="password" name="r_password"><br>
+            <input type="submit" value="Register" style="margin-top:5px;">
+        </form>
+        <form action="/process_log/" method="POST" style="display:inline-block;vertical-align:top;border:1px solid black;padding:0 18px 18px 18px;">
+            {%csrf_token%}
+            <h3>Login</h3>
+            <label for="username">Username:</label><br>
+            <input type="text" name="username"><br>
+            <label for="password">Password</label><br>
+            <input type="password" name="password"><br>
+            <input type="submit" value="Login" style="margin-top:5px;">
+        </form>
+    </body>
+</html>

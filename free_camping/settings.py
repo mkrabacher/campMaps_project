@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'apps.log_reg_app',
+    'apps.campsite_app',
     'apps.maps',
     'django.contrib.admin',
     'django.contrib.auth',

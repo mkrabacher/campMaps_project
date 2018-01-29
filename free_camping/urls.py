@@ -19,5 +19,6 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^', include('apps.maps.urls')),
     url(r'^', include('apps.log_reg_app.urls')),
+    url(r'^', include('apps.campsite_app.urls')),
     url(r'^admin/', admin.site.urls),
 ]

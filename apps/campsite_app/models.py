@@ -19,7 +19,7 @@ class CampsiteManager(models.Manager):
 
 class Campsite(models.Model):
     name = models.CharField(max_length=255)
-    uploader = models.ForeignKey(User, related_name='campsites')
+    uploader = models.ForeignKey(User, related_name='created_campsites')
     address = models.CharField(max_length=255)
     latitude = models.DecimalField(max_digits=8, decimal_places=6)
     longitude = models.DecimalField(max_digits=9, decimal_places=6)

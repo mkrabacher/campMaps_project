@@ -22,8 +22,9 @@ def process_reg(request):
         else:
             name = request.POST['name']
             username = request.POST['username']
+            email = request.POST['email']
             hashed_pass = bcrypt.hashpw(request.POST['password'].encode(), bcrypt.gensalt())
-            user = User.objects.create(name=name, username=username, password=hashed_pass)
+            user = User.objects.create(name=name, username=username, password=hashed_pass, email=email)
             request.session['user'] = user.id
             return redirect('/')
     return redirect('/login')

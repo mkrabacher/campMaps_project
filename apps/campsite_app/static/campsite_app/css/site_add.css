@@ -1,0 +1,38 @@
+* {
+    margin:0;
+    padding:0;
+}
+#campform {
+    border: 1px solid black;
+    min-width: 617px;
+}
+#campform div {
+    /* border: 1px solid black; */
+}
+#campform_left {
+    display: inline-block;
+    vertical-align: top;
+    width:50%;
+    height: 282px;
+}
+#campform_right {
+    display: inline-block;
+    vertical-align: top;
+    width:50%;
+    height: 282px;
+}
+#campform_bottom_left {
+    display: inline-block;
+    vertical-align: top;
+    width:50%;
+    background-color: lightblue;
+}
+#campform_bottom_right {
+    display: inline-block;
+    vertical-align: top;
+    width:50%;
+    background-color: pink;
+}
+#campform_submit {
+    margin-top: 5px;
+}

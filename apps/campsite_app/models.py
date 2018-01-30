@@ -21,13 +21,13 @@ class CampsiteManager(models.Manager):
             errors['street'] = "Street must be 2 or more characters"
         if len(postData['city']) < 2:
             errors['city'] = "City name must be 2 or more characters"
-        if len(postData['zip']) < 5:
-            errors['zip']
+        if len(postData['zip']) != 5:
+            errors['zip'] = "Zip codes must be 5 digits"
         if len(postData['country']) < 4:
             errors['country'] = "Country names must be 4 or more characters"
         if float(postData['longitude']) > 90 or float(postData['longitude']) < -90:
             errors['longitude'] = "Longitude must be between -90 and 90"
-        if float(postData['latitude']) > 180 or float(postData['latitude']) < 180:
+        if float(postData['latitude']) > 180 or float(postData['latitude']) < -180:
             errors['latitude'] = "Latitude must be between -180 and 180"
         return errors
 
@@ -46,6 +46,6 @@ class Campsite(models.Model):
     number_of_sites = models.CharField(max_length=10)
     rv_length = models.CharField(max_length=20)
     road_conditions = models.CharField(max_length=10)
-    created_at = models.DateTimeField(auto_now_add = True)
-    updated_at = models.DateTimeField(auto_now = True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     objects = CampsiteManager()

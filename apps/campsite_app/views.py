@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from models import *
 from ..log_reg_app.models import *
 
@@ -40,5 +41,11 @@ def site_add(request):
 
 def process_add(request):
     if request.method == "POST":
-        pass
+        errors = Campsite.objects.validator(request.POST)
+        if len(errors):
+            for tag, error in errors.iteritems():
+                messages.error(request, error, extra_tags=tag)
+            return redirect('/site/add')
+        else:
+            pass
     return redirect('/')

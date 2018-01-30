@@ -1,6 +1,21 @@
 <html>
     <head></head>
     <body>
-        <p>campsite_app/site.html</p>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+            </tr>
+            {% for campsite in campsites %}
+            <tr>
+                <th>{{ campsite.id }}</th>
+                <th><a href="/site/{{ campsite.id }}">{{ campsite.name }}</a></th>
+                <th>{{ campsite.latitude }}</th>
+                <th>{{ campsite.longitude }}</th>
+            </tr>
+            {% endfor %}
+        </table>
     </body>
 </html>

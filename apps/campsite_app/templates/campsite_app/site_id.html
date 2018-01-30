@@ -1,6 +1,16 @@
 <html>
     <head></head>
     <body>
-        <p>{{ site.name }}</p>
+        <div style="display:inline-block;vertical-align:top;text-align:right">
+            <p>Name:</p>
+            <p>Latitude:</p>
+            <p>Longitude:</p>
+        </div><!--
+        --><div style="display:inline-block;vertical-align:top;margin-left:10px;">
+            <p>{{ campsite.name }}</p>
+            <p>{{ campsite.latitude }}</p>
+            <p>{{ campsite.longitude }}</p>
+        </div>
+        
     </body>
 </html>

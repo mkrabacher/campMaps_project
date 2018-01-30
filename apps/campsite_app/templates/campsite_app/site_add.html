@@ -39,11 +39,13 @@
             --><div id="campform_middle">
                 <h3>Services</h3>
                 {% for service in services %}
+                <input type="hidden" name="service_{{service.id}}" value="off">
                 <input type="checkbox" name="service_{{service.id}}">
                 <label for="service_{{service.id}}">{{service.name}}</label>
                 {% endfor %}
                 <h3>Activities</h3>
                 {% for activity in activities %}
+                <input type="hidden" name="activity_{{activity.id}}" value="off">
                 <input type="checkbox" name="activity_{{activity.id}}">
                 <label for="activity_{{activity.id}}">{{activity.name}}</label>
                 {% endfor %}
@@ -51,6 +53,7 @@
             </div><!-- 
             --><div id="campform_bottom_left">
                 <label for="max_nights">Maximum number of nights you can camp:</label><br>
+                <input type="hidden" name="no_max_nights" value="off">
                 <input type="checkbox" name="no_max_nights"><label for="no_max_nights">No max</label>
                 <select name="max_nights" form="campform">
                     <option value="1">1</option>
@@ -78,6 +81,7 @@
             </div><!-- 
             --><div id="campform_bottom_right">
                 <label for="open_date">When's it open?</label>
+                <input type="hidden" name="year_round" value="off">
                 <input type="checkbox" name="year_round"><label for="year_round">Year Round</label><br>
                 <input type="date" name="open_date"><label for="close_date"> to </label>
                 <input type="date" name="close_date"><br>
@@ -87,7 +91,7 @@
                     <option value="25ft">25ft.</option>
                     <option value="35ft">35ft.</option>
                     <option value="45ft">45ft.</option>
-                    <option value="anylength">No Max</option>
+                    <option value="No Max">No Max</option>
                 </select>
             </div><br>
             <input type="submit" value="Submit Campsite" id="campform_submit">

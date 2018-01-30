@@ -1,15 +1,15 @@
 
-
-
 function initMap() {
 
     //if check to see if client is providing their current location
-    if (navigator.geolocation) {
+    if (navigator.geolocation.getCurrentPosition(function(position){position.coords.latitude})) {
+        console.log('hello')
         navigator.geolocation.getCurrentPosition(function (position) {
             var pos = {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             };
+
 
             map.setCenter(pos);
         });
@@ -20,18 +20,16 @@ function initMap() {
             center: pos
         });
     } else {
-        // Browser doesn't support Geolocation
-        var pos = { lat: 46, lng: -100 }
+        // if browser doesn't support Geolocation
+        var pos = { lat: 46.0, lng: -100.0 }
 
         //createing a new map object
         var map = new google.maps.Map(document.getElementById('map'), {
+            center: pos,
             zoom: 4,
-            center: pos
         });
     }
 
-    //coords for intial load location. change to my location 
-    myLatlng = pos
 
     //Sets listener for clicking to add a marker
     google.maps.event.addListener(map, 'click', function (event) {
@@ -97,19 +95,19 @@ function setMarkers(map) {
                     myLng = position.coords.longitude
                     console.log(myLat)
                 });
+                setTimeout(() => {
+                    contentString = '<div>' + loc[0] + '</div><div><a target="blank_" href="https://www.google.com/maps/dir/?api=1&origin=' + myLat + ',' + myLng + '&destination=' + loc[1] + ',' + loc[2] + '&z=10&t=h&hl=en-US&gl=US&mapclient=apiv3">Show in google maps</a>'
+                    
+                    infowindow = new google.maps.InfoWindow({
+                        content: contentString,
+                        position: markers[i].getPosition(),
+                        maxWidth: 200,
+                    });
+                    prevWindow.close()
+                    prevWindow = infowindow
+                    infowindow.open(map)
+                }, 200);
             };
-            setTimeout(() => {
-                contentString = '<div>' + loc[0] + '</div><div><a target="blank_" href="https://www.google.com/maps/dir/?api=1&origin=' + myLat + ',' + myLng + '&destination=' + loc[1] + ',' + loc[2] + '&z=10&t=h&hl=en-US&gl=US&mapclient=apiv3">Show in google maps</a>'
-                
-                infowindow = new google.maps.InfoWindow({
-                    content: contentString,
-                    position: markers[i].getPosition(),
-                    maxWidth: 200,
-                });
-                prevWindow.close()
-                prevWindow = infowindow
-                infowindow.open(map)
-            }, 200);
         });
         return marker
     });

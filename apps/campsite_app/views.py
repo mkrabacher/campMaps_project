@@ -3,12 +3,18 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.core import serializers
 from models import *
 from ..log_reg_app.models import *
 
 # Create your views here.
+def user(request):
+    context = {
+        'users': User.objects.all()
+    }
+    return render(request, 'campsite_app/user.html', context)
 def user_id(request, id):
-    try:
+    try: 
         user = User.objects.get(id=id)
         context = {
             'user': user
@@ -24,12 +30,17 @@ def site(request):
 
 def site_id(request, id):
     try:
-        context = {
-            'campsite': Campsite.objects.get(id=id)
-        }
-        return render(request, 'campsite_app/site_id.html', context)
+        campsite = Campsite.objects.get(id=id)
     except:
-        return redirect('/')
+        return redirect('/site')
+    services = Service.objects.filter(campsite=campsite)
+    activities = Activity.objects.filter(campsite=campsite)
+    context = {
+            'campsite': Campsite.objects.get(id=id),
+            'services': services,
+            'activities': activities
+        }
+    return render(request, 'campsite_app/site_id.html', context)
 
 def site_add(request):
     if 'user' in request.session:
@@ -39,7 +50,7 @@ def site_add(request):
         }
         return render(request, 'campsite_app/site_add.html', context)
     else:
-        #add message informing the user that they must be logged in to add a campsite
+        messages.error(request, 'You must be logged in to create a campsite')
         return redirect('/login')
 
 def process_add(request):
@@ -51,6 +62,8 @@ def process_add(request):
             return redirect('/site/add')
         else:
             campsite = Campsite.objects.create_campsite(request.POST)
+            Campsite.objects.add_activities(request.POST, campsite)
+            Campsite.objects.add_services(request.POST, campsite)
             target_string = "/site/" + str(campsite.id)
             return redirect(target_string)
     return redirect('/')

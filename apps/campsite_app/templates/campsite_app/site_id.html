@@ -11,6 +11,17 @@
             <p>{{ campsite.latitude }}</p>
             <p>{{ campsite.longitude }}</p>
         </div>
-        
+        <div>
+            <h3>Services</h3>
+            {% for service in services %}
+            <p>{{ service.name }}</p>
+            {% endfor %}
+        </div>
+        <div>
+            <h3>Activities</h3>
+            {% for activity in activities %}
+            <p>{{ activity.name }}</p>
+            {% endfor %}
+        </div>
     </body>
 </html>

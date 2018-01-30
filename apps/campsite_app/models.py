@@ -41,32 +41,45 @@ class CampsiteManager(models.Manager):
         address = postData['street'] + ";" + postData['city'] + ";" + postData['zip'] + ";" + postData['country']
         latitude = float(postData['latitude'])
         longitude = float(postData['longitude'])
-        if len(postData['description']):
-            description = postData['description']
-        else:
-            description = ""
+        description = postData['description']
         open_date = datetime.date(2018, 1, 1)
         close_date = datetime.date(2018, 12, 31)
-        # If no_max_nights is checked we want to store a string instead of postData['max_nights']. This will also be true for open_date/close_date.
+        if request.POST['no_max_nights'] == 'on':
+            max_nights = "No max"
+        else:
+            max_nights = postData['max_nights']
         max_nights = postData['max_nights']
         number_of_sites = postData['number_of_sites']
         rv_length = postData['rv_length']
         road_conditions = postData['road_conditions']
-
         return Campsite.objects.create(
-            name=name,
-            uploader=uploader,
-            address=address,
-            latitude=latitude,
-            longitude=longitude,
-            description=description,
-            open_date=open_date,
-            close_date=close_date,
-            max_nights=max_nights,
-            number_of_sites=number_of_sites,
-            rv_length=rv_length,
-            road_conditions=road_conditions,
-        )
+                name=name,
+                uploader=uploader,
+                address=address,
+                latitude=latitude,
+                longitude=longitude,
+                description=description,
+                open_date=open_date,
+                close_date=close_date,
+                max_nights=max_nights,
+                number_of_sites=number_of_sites,
+                rv_length=rv_length,
+                road_conditions=road_conditions,
+            )
+    def add_services(self, postData, campsite):
+        services = Service.objects.all()
+        for service in services:
+            key_string = "service_" + str(service.id)
+            if postData[key_string] == 'on':
+                campsite.services.add(service)
+        return campsite
+    def add_activities(self, postData, campsite):
+        activities = Activity.objects.all()
+        for activity in activities:
+            key_string = "activity_" + str(activity.id)
+            if postData[key_string] == 'on':
+                campsite.activities.add(activity)
+        return campsite
 
 class Campsite(models.Model):
     name = models.CharField(max_length=255)

@@ -1,32 +1,36 @@
 
 function initMap() {
+
+    //coords to use to initial 
     myLatlng = { lat: -34.024, lng: 150.887 }
 
+    //createing a new map object
     var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 10,
         center: myLatlng
     });
 
+    //Sets listener for clicking to add a marker
     google.maps.event.addListener(map, 'click', function (event) {
         addMarker(event.latLng, map);
+        $("#LatLng").text("Latitude: "+event.latLng.lat()+" "+", longitude: "+event.latLng.lng());
     });
 
     markers = setMarkers(map);
     // Add a marker clusterer to manage the markers.
     var markerCluster = new MarkerClusterer(map, markers,
         { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
-}
+};
 
 // Adds a marker to the map.
 function addMarker(location, map) {
-    // Add the marker at the clicked location, and add the next-available label
-    // from the array of alphabetical characters.
-    var marker = new google.maps.Marker({
+    // Add the marker at the clicked location, delete and reset the prev.
+    marker.setMap(null)
+    marker = new google.maps.Marker({
         position: location,
         map: map
     });
-}
-
+};
 
 // Add some markers to the map.
 function setMarkers(map) {
@@ -49,6 +53,7 @@ function setMarkers(map) {
         type: 'poly'
     };
 
+    //tracks previous tool tip so that you can close it when a new one is opened
     var prevWindow = new google.maps.InfoWindow({});
 
     //create list of map markers based off locations array
@@ -68,7 +73,8 @@ function setMarkers(map) {
             // map.setCenter(markers[i].getPosition());
             infowindow = new google.maps.InfoWindow({
                 content: loc[0],
-                position: markers[i].getPosition()
+                position: markers[i].getPosition(),
+                maxWidth:200,
             });
             prevWindow.close()
             prevWindow = infowindow

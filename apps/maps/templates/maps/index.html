@@ -5,29 +5,37 @@
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
   <meta charset="utf-8">
   <title>Marker Clustering</title>
-  
-  {%load static%}
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> {%load static%}
   <script src="{% static 'maps/displayMap.js' %}" alt="map"></script>
   <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCXR-DhGmrWqToo99WqiqgT26gabtvvO4&callback=initMap"></script>
-  
+
   <style>
     /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
+
     #map {
       height: 100%;
     }
 
-    html, body {
+    html,
+    body {
       height: 100%;
       margin: 0;
       padding: 0;
     }
-
   </style>
 </head>
 
 <body>
+  <div id="floating-panel">
+    <input onclick="clearMarkers();" type=button value="Hide Markers">
+    <input onclick="showMarkers();" type=button value="Show All Markers">
+    <input onclick="deleteMarkers();" type=button value="Delete Markers">
+    <text id="LatLng"></text>
+    
+  </div>
   <div id="map"></div>
 </body>
 

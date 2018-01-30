@@ -1,19 +1,42 @@
 
 function initMap() {
 
-    //coords to use to initial 
-    myLatlng = { lat: -34.024, lng: 150.887 }
+    //if check to see if client is providing their current location
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            var pos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
+            
+            map.setCenter(pos);
+        }, function () {
+            handleLocationError(true, infoWindow, map.getCenter());
+        });
+        
+        //createing a new map object
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 10,
+            center: pos
+        });
+    } else {
+        // Browser doesn't support Geolocation
+        var pos = { lat: 46, lng: -100 }
+        
+        //createing a new map object
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 4,
+            center: pos
+        });
+    }
 
-    //createing a new map object
-    var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 10,
-        center: myLatlng
-    });
+    //coords for intial load location. change to my location 
+    myLatlng = pos
 
     //Sets listener for clicking to add a marker
     google.maps.event.addListener(map, 'click', function (event) {
         addMarker(event.latLng, map);
-        $("#LatLng").text("Latitude: "+event.latLng.lat()+" "+", longitude: "+event.latLng.lng());
+        $("#LatLng").text("Latitude: " + event.latLng.lat() + " " + ", longitude: " + event.latLng.lng());
     });
 
     markers = setMarkers(map);
@@ -38,13 +61,11 @@ function setMarkers(map) {
     // direction to the right and in the Y direction down.
     var image = {
         url: 'https://cdn1.iconfinder.com/data/icons/nature/32/tent-128.png',
-        // This marker is 20 pixels wide by 32 pixels high.
-        // The origin for this image is (0, 0).
         origin: new google.maps.Point(0, 0),
-        // The anchor for this image is the base of the flagpole at (0, 32).
         anchor: new google.maps.Point(0, 0),
         scaledSize: new google.maps.Size(20, 20)
     };
+
     // Shapes define the clickable region of the icon. The type defines an HTML
     // <area> element 'poly' which traces out a polygon as a series of X,Y points.
     // The final coordinate closes the poly by connecting to the first coordinate.
@@ -74,7 +95,7 @@ function setMarkers(map) {
             infowindow = new google.maps.InfoWindow({
                 content: loc[0],
                 position: markers[i].getPosition(),
-                maxWidth:200,
+                maxWidth: 200,
             });
             prevWindow.close()
             prevWindow = infowindow
@@ -86,10 +107,11 @@ function setMarkers(map) {
     return markers
 };
 
+//array of test locations. to be replaced with campsites locations. Dicts? Tuples?
 var locations = [
-    ['Bondi Beach', -33.890542, 151.274856, 4],
-    ['Coogee Beach', -33.923036, 151.259052, 5],
-    ['Cronulla Beach', -34.028249, 151.157507, 3],
-    ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
+    ['Index Climbers Camp', 47.814826, -121.580629, 4],
+    ['Ruby Chow Park. Free to camp there.', 47.546118, -122.314052, 5],
+    ['Parking lot on Icicle Creek where you can camp.', 47.543728, -120.735529, 3],
+    ['Parking lot on Icicle Creek where you can camp.', -33.80010128657071, -120.735529, 2],
     ['Maroubra Beach', -33.950198, 151.259302, 1]
 ]

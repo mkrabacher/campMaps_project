@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Marker Clustering</title>
+    <script>
+        var cool_array = []
+        $(document).ready(function() {
+            {% for site in sites %}
+            cool_array.push(['{{ site.name }}', {{ site.latitude }}, {{ site.longitude }}])
+            {% endfor %}
+            console.log(cool_array)
+        })
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> {%load static%}
+    <script src="{% static 'maps/displayMap.js' %}" alt="map"></script>
+    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCXR-DhGmrWqToo99WqiqgT26gabtvvO4&callback=initMap"></script>
+    
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+
+        #map {
+            height: 100%;
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .pac-controls {
+            display: inline-block;
+            padding: 5px 11px;
+        }
+
+        .pac-controls label {
+            font-family: Roboto;
+            font-size: 13px;
+            font-weight: 300;
+        }
+
+        #pac-input {
+            background-color: #fff;
+            font-family: Roboto;
+            font-size: 15px;
+            font-weight: 300;
+            margin-left: 12px;
+            padding: 0 11px 0 13px;
+            text-overflow: ellipsis;
+            width: 400px;
+        }
+
+        #pac-input:focus {
+            border-color: #4d90fe;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="floating-panel">
+        <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+        <text id="LatLng"></text>
+
+    </div>
+    <div id="map"></div>
+</body>
+
+</html>

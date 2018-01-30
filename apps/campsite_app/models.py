@@ -44,7 +44,7 @@ class CampsiteManager(models.Manager):
         description = postData['description']
         open_date = datetime.date(2018, 1, 1)
         close_date = datetime.date(2018, 12, 31)
-        if request.POST['no_max_nights'] == 'on':
+        if postData['no_max_nights'] == 'on':
             max_nights = "No max"
         else:
             max_nights = postData['max_nights']

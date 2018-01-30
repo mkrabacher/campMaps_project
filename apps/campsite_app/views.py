@@ -8,11 +8,18 @@ from models import *
 from ..log_reg_app.models import *
 
 # Create your views here.
+def index(request):
+    sites = Campsite.objects.all()
+    context = {
+        'sites': sites
+    }
+    return render(request,'campsite_app/index.html', context)
 def user(request):
     context = {
         'users': User.objects.all()
     }
     return render(request, 'campsite_app/user.html', context)
+
 def user_id(request, id):
     try: 
         user = User.objects.get(id=id)
@@ -22,6 +29,7 @@ def user_id(request, id):
         return render(request, 'campsite_app/user_id.html', context)
     except:
         return redirect('/')
+
 def site(request):
     context = {
         'campsites': Campsite.objects.all()

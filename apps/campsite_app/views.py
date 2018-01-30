@@ -17,12 +17,15 @@ def user_id(request, id):
     except:
         return redirect('/')
 def site(request):
-    return render(request, 'campsite_app/site.html')
+    context = {
+        'campsites': Campsite.objects.all()
+    }
+    return render(request, 'campsite_app/site.html', context)
 
 def site_id(request, id):
     try:
         context = {
-            'site': Campsite.objects.get(id=id)
+            'campsite': Campsite.objects.get(id=id)
         }
         return render(request, 'campsite_app/site_id.html', context)
     except:
@@ -41,11 +44,13 @@ def site_add(request):
 
 def process_add(request):
     if request.method == "POST":
-        errors = Campsite.objects.validator(request.POST)
+        errors = Campsite.objects.validator(request.POST, request.session['user'])
         if len(errors):
             for tag, error in errors.iteritems():
                 messages.error(request, error, extra_tags=tag)
             return redirect('/site/add')
         else:
-            pass
+            campsite = Campsite.objects.create_campsite(request.POST)
+            target_string = "/site/" + str(campsite.id)
+            return redirect(target_string)
     return redirect('/')

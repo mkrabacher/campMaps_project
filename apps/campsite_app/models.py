@@ -3,6 +3,8 @@ from __future__ import unicode_literals
 
 from django.db import models
 from ..log_reg_app.models import *
+import datetime
+from datetime import date
 
 # Create your models here.
 class Service(models.Model):
@@ -12,9 +14,12 @@ class Activity(models.Model):
     name = models.CharField(max_length=255)
 
 class CampsiteManager(models.Manager):
-    def validator(self, postData):
+    def validator(self, postData, sessionUser):
         errors = {}
-        # Validations for adding a campsite go here
+        # This currently validates (name, street, city, zip, and country string length), (long/lat value, long/lat still need to be validated that they convert successfully to a float), (request.session['user'] matches request.POST['uploader'])
+        if str(sessionUser) != postData['uploader']:
+            #This error currently reveals things about how we do logged in users
+            errors['uploader'] = "The logged in user did not match the creator form"
         if len(postData['name']) < 3:
             errors['name'] = "Names must be 3 or more characters"
         if len(postData['street']) < 2:
@@ -25,11 +30,43 @@ class CampsiteManager(models.Manager):
             errors['zip'] = "Zip codes must be 5 digits"
         if len(postData['country']) < 4:
             errors['country'] = "Country names must be 4 or more characters"
-        if float(postData['longitude']) > 90 or float(postData['longitude']) < -90:
-            errors['longitude'] = "Longitude must be between -90 and 90"
-        if float(postData['latitude']) > 180 or float(postData['latitude']) < -180:
-            errors['latitude'] = "Latitude must be between -180 and 180"
+        if float(postData['latitude']) > 90 or float(postData['latitude']) < -90:
+            errors['latitude'] = "Latitude must be between -90 and 90"
+        if float(postData['longitude']) > 180 or float(postData['longitude']) < -180:
+            errors['longitude'] = "Longitude must be between -180 and 180"
         return errors
+    def create_campsite(self, postData):
+        name = postData['name']
+        uploader = User.objects.get(id=int(postData['uploader']))
+        address = postData['street'] + ";" + postData['city'] + ";" + postData['zip'] + ";" + postData['country']
+        latitude = float(postData['latitude'])
+        longitude = float(postData['longitude'])
+        if len(postData['description']):
+            description = postData['description']
+        else:
+            description = ""
+        open_date = datetime.date(2018, 1, 1)
+        close_date = datetime.date(2018, 12, 31)
+        # If no_max_nights is checked we want to store a string instead of postData['max_nights']. This will also be true for open_date/close_date.
+        max_nights = postData['max_nights']
+        number_of_sites = postData['number_of_sites']
+        rv_length = postData['rv_length']
+        road_conditions = postData['road_conditions']
+
+        return Campsite.objects.create(
+            name=name,
+            uploader=uploader,
+            address=address,
+            latitude=latitude,
+            longitude=longitude,
+            description=description,
+            open_date=open_date,
+            close_date=close_date,
+            max_nights=max_nights,
+            number_of_sites=number_of_sites,
+            rv_length=rv_length,
+            road_conditions=road_conditions,
+        )
 
 class Campsite(models.Model):
     name = models.CharField(max_length=255)

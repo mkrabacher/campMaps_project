@@ -1,30 +1,29 @@
 
+var map
 function initMap() {
 
-    //if check to see if client is providing their current location
-    if (navigator.geolocation.getCurrentPosition(function(position){position.coords.latitude})) {
+    if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
             var pos = {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             };
-
-
             map.setCenter(pos);
         });
-
         //createing a new map object
-        var map = new google.maps.Map(document.getElementById('map'), {
+        map = new google.maps.Map(document.getElementById('map'), {
             zoom: 10,
             center: pos
         });
+
     } else {
         // if browser doesn't support Geolocation
         var pos = { lat: 46.0, lng: -100.0 }
 
+        map.setCenter(pos);
         //createing a new map object
-        var map = new google.maps.Map(document.getElementById('map'), {
-            center: pos,
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: { lat: -34.397, lng: 150.644 },
             zoom: 4,
         });
     }
@@ -91,12 +90,12 @@ function setMarkers(map) {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function (position) {
                     myLat = position.coords.latitude,
-                    myLng = position.coords.longitude
+                        myLng = position.coords.longitude
                     console.log(myLat)
                 });
                 setTimeout(() => {
-                    contentString = '<div>' + loc[0] + '</div><div><a target="blank_" href="https://www.google.com/maps/dir/?api=1&origin=' + myLat + ',' + myLng + '&destination=' + loc[1] + ',' + loc[2] + '&z=10&t=h&hl=en-US&gl=US&mapclient=apiv3">Show in google maps</a>'
-                    
+                    contentString = '<div>' + loc[0] + '</div><div><a target="blank_" href="https://www.google.com/maps/dir/?api=1&origin=' + myLat + ',' + myLng + '&destination=' + loc[1] + ',' + loc[2] + '&z=10&t=h&hl=en-US&gl=US&mapclient=apiv3">Get Directions</a>'
+
                     infowindow = new google.maps.InfoWindow({
                         content: contentString,
                         position: markers[i].getPosition(),

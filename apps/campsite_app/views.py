@@ -80,3 +80,6 @@ def process_add(request):
 def sites_json(request):
     sites = Campsite.objects.all()
     return HttpResponse(serializers.serialize("json", sites), content_type="application/json")
+
+def json_test(request):
+    return render(request, 'campsite_app/json_test.html')

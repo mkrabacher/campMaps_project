@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from django.contrib import messages
 from django.core import serializers
 from models import *
@@ -14,6 +14,7 @@ def index(request):
         'sites': sites
     }
     return render(request,'campsite_app/index.html', context)
+
 def user(request):
     context = {
         'users': User.objects.all()
@@ -75,3 +76,7 @@ def process_add(request):
             target_string = "/site/" + str(campsite.id)
             return redirect(target_string)
     return redirect('/')
+
+def sites_json(request):
+    sites = Campsite.objects.all()
+    return HttpResponse(serializers.serialize("json", sites), content_type="application/json")

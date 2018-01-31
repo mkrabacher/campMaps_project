@@ -1,12 +1,17 @@
 <html>
     <head>
+        {% load static %}
         <script src="http://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
         <script>
             $(document).ready(function() {
                 function ajax_location_build(arr) {
+                    var locations = []
                     for (var i=0; i<arr.length; i++) {
                         fields = arr[i]['fields']
-                        console.log("Name: " + fields['name'] + " Latitude: " + fields['latitude'] + " Longitude: " + fields['longitude'])
+                        var push_arr = []
+                        push_arr.push(fields['name'])
+                        push_arr.push(parseFloat(fields['latitude']))
+                        push_arr.push(parseFloat(fields['longitude']))
                     }
                 }
                 $.ajax({
@@ -21,6 +26,7 @@
     </head>
     <body>
         <p>json_test.html</p>
-        <div id="append_div"></div>
+        <img src="{% static 'images/campIcon.png' %}" alt="asdfs">
+        <div id="map"></div>
     </body>
 </html>

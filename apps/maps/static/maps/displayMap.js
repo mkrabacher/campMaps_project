@@ -3,7 +3,6 @@ function initMap() {
 
     //if check to see if client is providing their current location
     if (navigator.geolocation.getCurrentPosition(function(position){position.coords.latitude})) {
-        console.log('hello')
         navigator.geolocation.getCurrentPosition(function (position) {
             var pos = {
                 lat: position.coords.latitude,
@@ -84,7 +83,7 @@ function setMarkers(map) {
             icon: image,
             shape: shape,
             title: loc[0],
-            zIndex: loc[3]
+            // zIndex: loc[3]
         });
         //add evenListener for actions when clicked
         marker.addListener('click', function () {

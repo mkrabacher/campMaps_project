@@ -1,100 +1,191 @@
 <html>
-    <head>
-        {%load static%}
-        <link rel="stylesheet" href="{% static 'campsite_app/css/site_add.css'%}">
-    </head>
-    <body>
-        {% if messages %}
-        <ul>
-            {% for message in messages %}
-                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+
+<head>
+    {%load static%}
+    <link rel="stylesheet" href="{% static 'campsite_app/css/site_add.css'%}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script src="{% static 'maps/addSiteMap.js' %}" alt="map"></script>
+    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCXR-DhGmrWqToo99WqiqgT26gabtvvO4&callback=initMap"></script>
+    
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+                   * element that contains the map. */
+
+        #map {
+            height: 500px;
+            width: 500px;
+            padding: 20px;
+            position: absolute;
+            top: 10px;
+            left: 390px;
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .pac-controls {
+            display: inline-block;
+            padding: 5px 11px;
+        }
+
+        .pac-controls label {
+            font-family: Roboto;
+            font-size: 13px;
+            font-weight: 300;
+        }
+
+        #pac-input {
+            background-color: #fff;
+            font-family: Roboto;
+            font-size: 15px;
+            font-weight: 300;
+            margin-left: 12px;
+            padding: 0 11px 0 13px;
+            text-overflow: ellipsis;
+            width: 400px;
+        }
+
+        #pac-input:focus {
+            border-color: #4d90fe;
+        }
+    </style>
+</head>
+
+<body>
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
             {% endfor %}
-        </ul>
-        {% endif %}
-        <form action="/process_add/" method="POST" id="campform">
-            {%csrf_token%}
-            <input type="hidden" name="uploader" value="{{ request.session.user }}">
-            <div id="campform_left">
-                <label for="name">Name:</label><br>
-                <input type="text" name="name"><br>
-                <h3>Address</h3>
-                <label for="street">Street:</label><br>
-                <input type="text" name="street"><br>
-                <label for="city">City:</label><br>
-                <input type="text" name="city"><br>
-                <label for="zip">Zip Code:</label><br>
-                <input type="text" name="zip"><br>
-                <label for="country">Country:</label><br>
-                <input type="text" name="country"><br>
-                <label for="latitude">Latitude:</label><br>
-                <input type="text" name="latitude" value="0"><br>
-                <label for="longitude">Longitude:</label><br>
-                <input type="text" name="longitude" value="0"><br>
-            </div><!-- 
-            --><div id="campform_right">
-                <!-- Map would go here -->
-                <label for="description">Description:</label><br>
-                <textarea name="description" cols="36" rows="6"></textarea><br>
-            </div><!-- 
-            --><div id="campform_middle">
-                <h3>Services</h3>
-                {% for service in services %}
-                <input type="hidden" name="service_{{service.id}}" value="off">
-                <input type="checkbox" name="service_{{service.id}}">
-                <label for="service_{{service.id}}">{{service.name}}</label>
-                {% endfor %}
-                <h3>Activities</h3>
-                {% for activity in activities %}
-                <input type="hidden" name="activity_{{activity.id}}" value="off">
-                <input type="checkbox" name="activity_{{activity.id}}">
-                <label for="activity_{{activity.id}}">{{activity.name}}</label>
-                {% endfor %}
-                <br>
-            </div><!-- 
-            --><div id="campform_bottom_left">
-                <label for="max_nights">Maximum number of nights you can camp:</label><br>
-                <input type="hidden" name="no_max_nights" value="off">
-                <input type="checkbox" name="no_max_nights"><label for="no_max_nights">No max</label>
-                <select name="max_nights" form="campform">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                </select><br>
-                <label for="number_of_sites" form="campform">How many camp sites at this location?</label><br>
-                <select name="number_of_sites" form="campform">
-                    <option value="1-4">1-4</option>
-                    <option value="5-10">5-10</option>
-                    <option value="10-20">10-20</option>
-                    <option value="20+">20+</option>
-                </select><br>
-                <label for="road_conditions">Worst road conditions getting there?</label><br>
-                <select name="road_conditions" form="campform">
-                    <option value="paved">Paved</option>
-                    <option value="gravel">Gravel</option>
-                    <option value="dirt">Dirt</option>
-                    <option value="4x4">4x4</option>
-                </select>
-            </div><!-- 
-            --><div id="campform_bottom_right">
-                <label for="open_date">When's it open?</label>
-                <input type="hidden" name="year_round" value="off">
-                <input type="checkbox" name="year_round"><label for="year_round">Year Round</label><br>
-                <input type="date" name="open_date"><label for="close_date"> to </label>
-                <input type="date" name="close_date"><br>
-                <label for="rv_length">What's the maximum RV length?</label>
-                <select name="rv_length" form="campform">
-                    <option value="15ft">15ft.</option>
-                    <option value="25ft">25ft.</option>
-                    <option value="35ft">35ft.</option>
-                    <option value="45ft">45ft.</option>
-                    <option value="No Max">No Max</option>
-                </select>
-            </div><br>
-            <input type="submit" value="Submit Campsite" id="campform_submit">
-        </form>
-    </body>
+    </ul>
+    {% endif %}
+    <form action="/process_add/" method="POST" id="campform">
+        {%csrf_token%}
+        <input type="hidden" name="uploader" value="{{ request.session.user }}">
+        <div id="campform_left">
+            <label for="name">Name:</label>
+            <br>
+            <input type="text" name="name">
+            <br>
+            <h3>Address</h3>
+            <label for="street">Street:</label>
+            <br>
+            <input type="text" name="street">
+            <br>
+            <label for="city">City:</label>
+            <br>
+            <input type="text" name="city">
+            <br>
+            <label for="zip">Zip Code:</label>
+            <br>
+            <input type="text" name="zip">
+            <br>
+            <label for="country">Country:</label>
+            <br>
+            <input type="text" name="country">
+            <br>
+            <label for="latitude">Latitude:</label>
+            <br>
+            <input type="text" id="add-latitude" name="latitude" value="0">
+            <br>
+            <label for="longitude">Longitude:</label>
+            <br>
+            <input type="text" id="add-longitude" name="longitude" value="0">
+            <br>
+        </div>
+        <!-- 
+            -->
+        <div id="campform_right">
+            <!-- Map would go here -->
+            <div id="map"></div>
+            <label for="description">Description:</label>
+            <br>
+            <textarea name="description" cols="36" rows="6"></textarea>
+            <br>
+        </div>
+        <!-- 
+            -->
+        <div id="campform_middle">
+            <h3>Services</h3>
+            {% for service in services %}
+            <input type="hidden" name="service_{{service.id}}" value="off">
+            <input type="checkbox" name="service_{{service.id}}">
+            <label for="service_{{service.id}}">{{service.name}}</label>
+            {% endfor %}
+            <h3>Activities</h3>
+            {% for activity in activities %}
+            <input type="hidden" name="activity_{{activity.id}}" value="off">
+            <input type="checkbox" name="activity_{{activity.id}}">
+            <label for="activity_{{activity.id}}">{{activity.name}}</label>
+            {% endfor %}
+            <br>
+        </div>
+        <!-- 
+            -->
+        <div id="campform_bottom_left">
+            <label for="max_nights">Maximum number of nights you can camp:</label>
+            <br>
+            <input type="hidden" name="no_max_nights" value="off">
+            <input type="checkbox" name="no_max_nights">
+            <label for="no_max_nights">No max</label>
+            <select name="max_nights" form="campform">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+            </select>
+            <br>
+            <label for="number_of_sites" form="campform">How many camp sites at this location?</label>
+            <br>
+            <select name="number_of_sites" form="campform">
+                <option value="1-4">1-4</option>
+                <option value="5-10">5-10</option>
+                <option value="10-20">10-20</option>
+                <option value="20+">20+</option>
+            </select>
+            <br>
+            <label for="road_conditions">Worst road conditions getting there?</label>
+            <br>
+            <select name="road_conditions" form="campform">
+                <option value="paved">Paved</option>
+                <option value="gravel">Gravel</option>
+                <option value="dirt">Dirt</option>
+                <option value="4x4">4x4</option>
+            </select>
+        </div>
+        <!-- 
+            -->
+        <div id="campform_bottom_right">
+            <label for="open_date">When's it open?</label>
+            <input type="hidden" name="year_round" value="off">
+            <input type="checkbox" name="year_round">
+            <label for="year_round">Year Round</label>
+            <br>
+            <input type="date" name="open_date">
+            <label for="close_date"> to </label>
+            <input type="date" name="close_date">
+            <br>
+            <label for="rv_length">What's the maximum RV length?</label>
+            <select name="rv_length" form="campform">
+                <option value="15ft">15ft.</option>
+                <option value="25ft">25ft.</option>
+                <option value="35ft">35ft.</option>
+                <option value="45ft">45ft.</option>
+                <option value="No Max">No Max</option>
+            </select>
+        </div>
+        <br>
+        <input type="submit" value="Submit Campsite" id="campform_submit">
+    </form>
+</body>
+
 </html>

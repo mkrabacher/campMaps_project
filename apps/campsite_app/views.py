@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.shortcuts import render, redirect, HttpResponse
 from django.contrib import messages
 from django.core import serializers
+from django.contrib.staticfiles.templatetags.staticfiles import static
 from models import *
 from ..log_reg_app.models import *
 

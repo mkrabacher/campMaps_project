@@ -1,27 +1,50 @@
 <html>
-    <head></head>
-    <body>
-        <div style="display:inline-block;vertical-align:top;text-align:right">
-            <p>Name:</p>
-            <p>Latitude:</p>
-            <p>Longitude:</p>
-        </div><!--
-        --><div style="display:inline-block;vertical-align:top;margin-left:10px;">
-            <p>{{ campsite.name }}</p>
-            <p>{{ campsite.latitude }}</p>
-            <p>{{ campsite.longitude }}</p>
-        </div>
-        <div>
-            <h3>Services</h3>
-            {% for service in services %}
-            <p>{{ service.name }}</p>
-            {% endfor %}
-        </div>
-        <div>
-            <h3>Activities</h3>
-            {% for activity in activities %}
-            <p>{{ activity.name }}</p>
-            {% endfor %}
-        </div>
-    </body>
+
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>{{campsite.name}}</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        var cool_array = []
+        {% for site in sites %}
+        cool_array.push(['{{ site.name }}', {{ site.latitude }}, {{ site.longitude }}])
+        {% endfor %}
+        console.log(cool_array)
+    </script> {%load static%}
+    <script src="{% static 'js/displayMap.js' %}" alt="map"></script>
+    <script src="{% static 'js/weather.js' %}" alt="weather"></script>
+    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCXR-DhGmrWqToo99WqiqgT26gabtvvO4&callback=initMap"></script>
+
+</head>
+
+<body>
+    <div style="display:inline-block;vertical-align:top;text-align:right">
+        <p>Name:</p>
+        <p>Latitude:</p>
+        <p>Longitude:</p>
+    </div>
+    <!--
+        -->
+    <div style="display:inline-block;vertical-align:top;margin-left:10px;">
+        <p>{{ campsite.name }}</p>
+        <p id="site_latitude">{{ campsite.latitude }}</p>
+        <p id="site_longitude">{{ campsite.longitude }}</p>
+    </div>
+    <div>
+        <h3>Services</h3>
+        {% for service in services %}
+        <p>{{ service.name }}</p>
+        {% endfor %}
+    </div>
+    <div>
+        <h3>Activities</h3>
+        {% for activity in activities %}
+        <p>{{ activity.name }}</p>
+        {% endfor %}
+    </div>
+</body>
+
 </html>

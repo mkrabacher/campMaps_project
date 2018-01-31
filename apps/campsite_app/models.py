@@ -30,10 +30,18 @@ class CampsiteManager(models.Manager):
             errors['zip'] = "Zip codes must be 5 digits"
         if len(postData['country']) < 4:
             errors['country'] = "Country names must be 4 or more characters"
-        if float(postData['latitude']) > 90 or float(postData['latitude']) < -90:
-            errors['latitude'] = "Latitude must be between -90 and 90"
-        if float(postData['longitude']) > 180 or float(postData['longitude']) < -180:
-            errors['longitude'] = "Longitude must be between -180 and 180"
+        try:
+            if float(postData['latitude']) > 90 or float(postData['latitude']) < -90:
+                errors['latitude'] = "Latitude must be between -90 and 90"
+        except:
+            errors['latitude'] = "Latitude could not be stored as a number"
+        try:
+            if float(postData['longitude']) > 180 or float(postData['longitude']) < -180:
+                errors['longitude'] = "Longitude must be between -180 and 180"
+        except:
+            errors['longitude'] = "Longitude could not be stored as a number"
+       
+        
         return errors
     def create_campsite(self, postData):
         name = postData['name']

@@ -35,7 +35,9 @@ function initMap() {
     google.maps.event.addListener(map, 'click', function (event) {
         // addMarker(event.latLng, map);
         currentLatLng = {'lat':event.latLng.lat(), 'lng':event.latLng.lng()}
-        $("#LatLng").text("Latitude: " + currentLatLng.lat + " " + ", longitude: " + currentLatLng.lng);
+        $("#add-latitude").val(currentLatLng.lat);
+        $("#add-longitude").val(currentLatLng.lng);
+        addMarker(currentLatLng, map)
     });
 
     // var markers

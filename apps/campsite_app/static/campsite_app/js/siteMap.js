@@ -2,46 +2,31 @@
 var map
 //turns the map div in the html into a map.
 function initMap() {
-
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function (position) {
-            var pos = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
-            };
-            map.setCenter(pos);
-        });
-        //createing a new map object
-        map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 10,
-            center: pos
-        });
-
-    } else {
-        // if browser doesn't support Geolocation
-        // this is currently not working. not neccessarily the below code but something to do with this if statement and how the google maps object works.
-        var pos = { lat: 46.0, lng: -100.0 }
-
-        map.setCenter(pos);
-        //createing a new map object
-        map = new google.maps.Map(document.getElementById('map'), {
-            center: { lat: -34.397, lng: 150.644 },
-            zoom: 4,
-        });
-    }
+    var pos = {
+        lat: parseFloat($("#site-latitude").html()),
+        lng: parseFloat($("#site-longitude").html()),
+    };
+    console.log(pos);
+    //createing a new map object
+    map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 9,
+        center: pos
+    });
+    
+    map.setCenter(pos)
 
 
     //Sets listener for clicking to add a marker
     google.maps.event.addListener(map, 'click', function (event) {
         // addMarker(event.latLng, map);
-        currentLatLng = {'lat':event.latLng.lat(), 'lng':event.latLng.lng()}
+        currentLatLng = { 'lat': event.latLng.lat(), 'lng': event.latLng.lng() }
         $("#LatLng").text("Latitude: " + currentLatLng.lat + " " + ", longitude: " + currentLatLng.lng);
     });
 
     // var markers
     $.ajax({
         url: '/sites.json',
-        success: function(serverResponse) {
+        success: function (serverResponse) {
             ajax_location_build(serverResponse)
         }
     })
@@ -57,14 +42,14 @@ function initMap() {
 };
 // Builds the location array and calls addMarker
 function ajax_location_build(arr) {
-    for (var i=0; i<arr.length; i++) {
+    for (var i = 0; i < arr.length; i++) {
         fields = arr[i]['fields']
         var push_arr = []
         push_arr.push(fields['name'])
         push_arr.push(parseFloat(fields['latitude']))
         push_arr.push(parseFloat(fields['longitude']))
         address_string = ""
-        for (var j=0; j<fields['address'].length;j++) {
+        for (var j = 0; j < fields['address'].length; j++) {
             if (fields['address'].charAt(j) != ';') {
                 address_string = address_string + fields['address'].charAt(j)
             } else {

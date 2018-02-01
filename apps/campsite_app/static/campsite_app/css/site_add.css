@@ -1,38 +1,105 @@
 * {
     margin:0;
     padding:0;
+    font-family: Arial, Helvetica, sans-serif;
 }
+
+#navbar {
+    background-color: rgb(172, 92, 36);
+    height: 50px;
+}
+
+.nav-btn {
+    display: inline-block;
+    line-height: 50px;
+    vertical-align: top;
+    padding: 0px 10px;
+    border-right: 2px solid rgb(83, 37, 2);
+    text-decoration: none;
+    color: rgb(9, 77, 12);
+}
+
+.nav-btn:hover {
+    background-color: rgb(202, 119, 10);
+}
+
+#nav-image {
+    border-right: 2px solid rgb(83, 37, 2);
+    padding: 0px 5px 5px;
+}
+
 #campform {
-    border: 1px solid black;
     min-width: 617px;
 }
+
 #campform div {
     /* border: 1px solid black; */
 }
+
 #campform_left {
     display: inline-block;
     vertical-align: top;
     width:50%;
     height: 282px;
 }
+
 #campform_right {
     display: inline-block;
     vertical-align: top;
     width:50%;
     height: 282px;
 }
+
 #campform_bottom_left {
     display: inline-block;
     vertical-align: top;
     width:50%;
     background-color: lightblue;
 }
+
 #campform_bottom_right {
     display: inline-block;
     vertical-align: top;
     width:50%;
     background-color: pink;
 }
+
 #campform_submit {
     margin-top: 5px;
+}
+
+/* Always set the map height explicitly to define the size of the div
+    * element that contains the map. */
+
+#map {
+    height: 500px;
+    width: 500px;
+    margin: 20px;
+    display: inline-block;
+}
+
+.pac-controls {
+    display: inline-block;
+    padding: 5px 11px;
+}
+
+.pac-controls label {
+    font-family: Roboto;
+    font-size: 13px;
+    font-weight: 300;
+}
+
+#pac-input {
+    background-color: #fff;
+    font-family: Roboto;
+    font-size: 15px;
+    font-weight: 300;
+    margin-left: 12px;
+    padding: 0 11px 0 13px;
+    text-overflow: ellipsis;
+    width: 400px;
+}
+
+#pac-input:focus {
+    border-color: #4d90fe;
 }

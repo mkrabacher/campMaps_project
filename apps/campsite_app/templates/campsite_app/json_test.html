@@ -1,6 +1,7 @@
 <html>
     <head>
         {% load static %}
+        <link rel="stylesheet" href="{% static 'campsite_app/css/site_add.css'%}">
         <script src="http://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
         <script>
             $(document).ready(function() {
@@ -25,6 +26,21 @@
         </script>
     </head>
     <body>
+        <div id="navbar">
+            <img id="nav-image" src="/static/campsite_app/images/campIcon.png" alt="campIcon"><!-- 
+            --><a class="nav-btn" href="/"><b>Home</b></a><!-- 
+            --><a class="nav-btn" href="/about"><b>About</b></a><!-- 
+            -->{%if request.session.user%}<!-- 
+            --><a class="nav-btn" href="/user/{{request.session.user}}"><b>Profile</b></a><!-- 
+            --><a class="nav-btn" href="/site/add"><b>Add Site</b></a><!-- 
+            --><a class="nav-btn" href="/process_logout"><b>Logout</b></a><!-- 
+            -->{%else%}<!-- 
+            --><a class="nav-btn" href="/login"><b>Login</b></a><!-- 
+            --><a class="nav-btn" href="/login"><b>Register</b></a><!-- 
+            -->
+            {%endif%}
+        </div>
+        
         <p>json_test.html</p>
         <img src="{% static 'images/campIcon.png' %}" alt="asdfs">
         <div id="map"></div>

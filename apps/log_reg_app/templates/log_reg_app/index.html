@@ -1,6 +1,23 @@
 <html>
-    <head></head>
+    <head>
+        {%load static%}
+        <link rel="stylesheet" href="{% static 'campsite_app/css/site_add.css'%}">
+    </head>
     <body>
+        <div id="navbar">
+            <img id="nav-image" src="/static/campsite_app/images/campIcon.png" alt="campIcon"><!-- 
+            --><a class="nav-btn" href="/"><b>Home</b></a><!-- 
+            --><a class="nav-btn" href="/about"><b>About</b></a><!-- 
+            -->{%if request.session.user%}<!-- 
+            --><a class="nav-btn" href="/user/{{request.session.user}}"><b>Profile</b></a><!-- 
+            --><a class="nav-btn" href="/site/add"><b>Add Site</b></a><!-- 
+            --><a class="nav-btn" href="/process_logout"><b>Logout</b></a><!-- 
+            -->{%else%}<!-- 
+            --><a class="nav-btn" href="/login"><b>Login</b></a><!-- 
+            --><a class="nav-btn" href="/login"><b>Register</b></a><!-- 
+            -->
+            {%endif%}
+        </div>
         {% if 'user' in request.session %}
         <form action="/process_logout/" method="POST">
             {% csrf_token %}

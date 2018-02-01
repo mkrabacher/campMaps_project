@@ -12,6 +12,11 @@
     <!-- <script src="{% static 'js/weather.js' %}" alt="weather"></script> -->
     <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCXR-DhGmrWqToo99WqiqgT26gabtvvO4&callback=initMap"></script>
+    <script>
+        var site_lat = {{ campsite.latitude }};
+        var site_lon = {{ campsite.longitude }};
+    </script>
+    <script src="{% static 'campsite_app/js/weather_api.js' %}"></script>
 
 </head>
 
@@ -54,6 +59,7 @@
         <p>{{ activity.name }}</p>
         {% endfor %}
     </div>
+    <div id="weatherdiv"></div>
 </body>
 
 </html>

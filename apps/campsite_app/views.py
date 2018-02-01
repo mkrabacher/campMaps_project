@@ -4,7 +4,6 @@ from __future__ import unicode_literals
 from django.shortcuts import render, redirect, HttpResponse
 from django.contrib import messages
 from django.core import serializers
-from django.contrib.staticfiles.templatetags.staticfiles import static
 from models import *
 from ..log_reg_app.models import *
 
@@ -43,6 +42,9 @@ def site_id(request, id):
         campsite = Campsite.objects.get(id=id)
     except:
         return redirect('/site')
+    # Weather API backend call starts here
+    #
+    # Weather API backend call ends here
     services = Service.objects.filter(campsite=campsite)
     activities = Activity.objects.filter(campsite=campsite)
     context = {

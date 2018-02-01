@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="{% static 'campsite_app/css/site_add.css'%}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-    <script src="{% static 'maps/addSiteMap.js' %}" alt="map"></script>
+    <script src="{% static 'campsite_app/js/addSiteMap.js' %}" alt="map"></script>
     <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCXR-DhGmrWqToo99WqiqgT26gabtvvO4&callback=initMap"></script>
     
@@ -16,10 +16,8 @@
         #map {
             height: 500px;
             width: 500px;
-            padding: 20px;
-            position: absolute;
-            top: 10px;
-            left: 390px;
+            margin: 20px;
+            display: inline-block;
         }
 
         html,
@@ -98,20 +96,16 @@
             <br>
             <input type="text" id="add-longitude" name="longitude" value="0">
             <br>
-        </div>
-        <!-- 
-            -->
-        <div id="campform_right">
-            <!-- Map would go here -->
+        </div><!-- 
+        --><div id="campform_right">
+            <!-- Map here -->
             <div id="map"></div>
             <label for="description">Description:</label>
             <br>
             <textarea name="description" cols="36" rows="6"></textarea>
             <br>
-        </div>
-        <!-- 
-            -->
-        <div id="campform_middle">
+        </div><!-- 
+        --><div id="campform_middle">
             <h3>Services</h3>
             {% for service in services %}
             <input type="hidden" name="service_{{service.id}}" value="off">
@@ -125,10 +119,8 @@
             <label for="activity_{{activity.id}}">{{activity.name}}</label>
             {% endfor %}
             <br>
-        </div>
-        <!-- 
-            -->
-        <div id="campform_bottom_left">
+        </div><!-- 
+        --><div id="campform_bottom_left">
             <label for="max_nights">Maximum number of nights you can camp:</label>
             <br>
             <input type="hidden" name="no_max_nights" value="off">

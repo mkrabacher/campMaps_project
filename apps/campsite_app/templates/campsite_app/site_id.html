@@ -6,15 +6,9 @@
     <title>{{campsite.name}}</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script>
-        var cool_array = []
-        {% for site in sites %}
-        cool_array.push(['{{ site.name }}', {{ site.latitude }}, {{ site.longitude }}])
-        {% endfor %}
-        console.log(cool_array)
-    </script> {%load static%}
-    <script src="{% static 'js/displayMap.js' %}" alt="map"></script>
-    <script src="{% static 'js/weather.js' %}" alt="weather"></script>
+    {%load static%}
+    <script src="{% static 'campsite_app/js/siteMap.js' %}" alt="map"></script>
+    <!-- <script src="{% static 'js/weather.js' %}" alt="weather"></script> -->
     <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCXR-DhGmrWqToo99WqiqgT26gabtvvO4&callback=initMap"></script>
 
@@ -25,14 +19,13 @@
         <p>Name:</p>
         <p>Latitude:</p>
         <p>Longitude:</p>
-    </div>
-    <!--
-        -->
-    <div style="display:inline-block;vertical-align:top;margin-left:10px;">
+    </div><!--
+    --><div style="display:inline-block;vertical-align:top;margin-left:10px;">
         <p>{{ campsite.name }}</p>
-        <p id="site_latitude">{{ campsite.latitude }}</p>
-        <p id="site_longitude">{{ campsite.longitude }}</p>
+        <p id="site-latitude" value='{{ campsite.latitude }}'>{{ campsite.latitude }}</p>
+        <p id="site-longitude" value='{{ campsite.longitude }}'>{{ campsite.longitude }}</p>
     </div>
+    <div id="map" style="height: 500px; width:500px; display:inline-block"></div>
     <div>
         <h3>Services</h3>
         {% for service in services %}

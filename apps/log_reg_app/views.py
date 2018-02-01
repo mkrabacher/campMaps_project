@@ -43,7 +43,5 @@ def process_log(request):
     return redirect('/login')
 
 def process_logout(request):
-    if request.method == "POST":
-        request.session.clear()
-        return redirect('/login')
+    request.session.clear()
     return redirect('/login')

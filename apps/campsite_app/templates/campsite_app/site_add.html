@@ -4,58 +4,28 @@
     {%load static%}
     <link rel="stylesheet" href="{% static 'campsite_app/css/site_add.css'%}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
     <script src="{% static 'campsite_app/js/addSiteMap.js' %}" alt="map"></script>
     <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCXR-DhGmrWqToo99WqiqgT26gabtvvO4&callback=initMap"></script>
-    
-    <style>
-        /* Always set the map height explicitly to define the size of the div
-                   * element that contains the map. */
 
-        #map {
-            height: 500px;
-            width: 500px;
-            margin: 20px;
-            display: inline-block;
-        }
-
-        html,
-        body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
-
-        .pac-controls {
-            display: inline-block;
-            padding: 5px 11px;
-        }
-
-        .pac-controls label {
-            font-family: Roboto;
-            font-size: 13px;
-            font-weight: 300;
-        }
-
-        #pac-input {
-            background-color: #fff;
-            font-family: Roboto;
-            font-size: 15px;
-            font-weight: 300;
-            margin-left: 12px;
-            padding: 0 11px 0 13px;
-            text-overflow: ellipsis;
-            width: 400px;
-        }
-
-        #pac-input:focus {
-            border-color: #4d90fe;
-        }
-    </style>
 </head>
 
 <body>
+    <div id="navbar">
+        <img id="nav-image" src="/static/campsite_app/images/campIcon.png" alt="campIcon"><!-- 
+        --><a class="nav-btn" href="/"><b>Home</b></a><!-- 
+        --><a class="nav-btn" href="/about"><b>About</b></a><!-- 
+        -->{%if request.session.user%}<!-- 
+        --><a class="nav-btn" href="/user/{{request.session.user}}"><b>Profile</b></a><!-- 
+        --><a class="nav-btn" href="/site/add"><b>Add Site</b></a><!-- 
+        --><a class="nav-btn" href="/process_logout"><b>Logout</b></a><!-- 
+        -->{%else%}<!-- 
+        --><a class="nav-btn" href="/login"><b>Login</b></a><!-- 
+        --><a class="nav-btn" href="/login"><b>Register</b></a><!-- 
+        -->
+        {%endif%}
+    </div>
+    
     {% if messages %}
     <ul>
         {% for message in messages %}

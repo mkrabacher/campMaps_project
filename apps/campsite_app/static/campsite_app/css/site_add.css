@@ -23,7 +23,8 @@ h3 {
 }
 
 #container {
-    max-width: 1200px;
+    width: 1100px;
+    margin: auto;
 }
 
 /* ++++++++++++++++++++++++++NAVBAR++++++++++++++++++++++++++++++++
@@ -94,8 +95,76 @@ Always set the map height explicitly to define the size of the div
 */
 
 
+/* ++++++++++++++++++++++++++LOGIN++++++++++++++++++++++++++++++++
+*/
+.login_container {
+    padding: 20% 30%;
+}
+
+#login-box, #reg-box {
+    display:inline-block;
+    vertical-align:top;
+    border:1px solid black;
+    padding:0 18px 18px 18px;
+}
+
+#reg-box {
+    margin-right: 200px; 
+}
+
+
 /* ++++++++++++++++++++++++++SITE++++++++++++++++++++++++++++++++
 */
+#site-description {
+    display: inline-block;
+    max-width: 700px;
+    float: right;
+}
+
+#site-description h3{
+}
+
+#site-info-frame {
+    margin: 5px 0;
+    padding: 10px;
+    background-color: rgb(199, 157, 101);
+    border-radius: 5px;
+}
+
+.site-map {
+    height: 54vh;
+    width: 100%;
+    display: inline-block;
+    border-radius: 5px
+}
+
+#site-titles {
+    display:inline-block;
+    vertical-align:top;
+    text-align:left
+}
+
+#site-info {
+    display:inline-block;
+    vertical-align:top;
+    margin-left:10px;
+}
+
+#site-services {
+    display: inline-block;
+    vertical-align: top;
+}
+
+#site-activities {
+    display: inline-block;
+    vertical-align: top;
+}
+
+#weatherdiv{
+    display: inline-block;
+    vertical-align: top;
+}
+
 #weatherdiv div{
     display: inline-block;
     vertical-align: top;
@@ -114,11 +183,10 @@ Always set the map height explicitly to define the size of the div
 */
 .map-addpage {
     height: 54vh;
-    width: 500px;
+    width: 680px;
     margin: 20px;
     display: inline-block;
     border-radius: 5px;
-    width: 100%;
     margin: 0;
 }
 
@@ -150,19 +218,41 @@ Always set the map height explicitly to define the size of the div
 #campform_services {
     display: inline-block;
     vertical-align: top;
-    width:50%;
-    background-color: lightblue;
+    width:48%;
+    margin: 8px;
+    padding: 5px;
+    background-color: rgb(199, 157, 101);
+    border-radius: 5px;
+    width: 500px;
+}
+
+#campform_services .cb {
+    width: 150px;
+    display: inline-block;
+}
+
+#campform_activities .cb {
+    width: 180px;
+    display: inline-block
 }
 
 #campform_activities {
     display: inline-block;
     vertical-align: top;
-    width:50%;
-    background-color: pink;
+    width:48%;
+    margin: 8px;
+    background-color: rgb(199, 157, 101);
+    border-radius: 5px;
+    width: 500px;
 }
 
 #campform_submit {
-    margin-top: 5px;
+    height: 50px;
+    background-color: rgb(199, 157, 101);
+    margin: 10px 50px;
+    padding: 0 40px;
+    position: relative;
+    top: -30px;
 }
 
 

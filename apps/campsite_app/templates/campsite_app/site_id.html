@@ -22,54 +22,69 @@
 
 <body>
     <div id="navbar">
-        <img id="nav-image" src="/static/campsite_app/images/campIcon.png" alt="campIcon"><!-- 
-        --><a class="nav-btn" href="/"><b>Home</b></a><!-- 
-        --><a class="nav-btn" href="/about"><b>About</b></a><!-- 
-        -->{%if request.session.user%}<!-- 
-        --><a class="nav-btn" href="/user/{{request.session.user}}"><b>Profile</b></a><!-- 
-        --><a class="nav-btn" href="/site/add"><b>Add Site</b></a><!-- 
-        --><a class="nav-btn" href="/process_logout"><b>Logout</b></a><!-- 
-        -->{%else%}<!-- 
-        --><a class="nav-btn" href="/login"><b>Login</b></a><!-- 
-        --><a class="nav-btn" href="/login"><b>Register</b></a><!-- 
+        <h1>BivyMaps</h1><!-- 
+        --><img id="nav-image" src="/static/campsite_app/images/campIcon.png" alt="campIcon"><!-- 
         -->
-        {%endif%}
+        <div id="nav-btns-wrapper">
+            <a class="nav-btn" href="/"><b>Home</b></a><!-- 
+            --><a class="nav-btn" href="/about"><b>About</b></a><!-- 
+            -->{%if request.session.user%}<!-- 
+            --><a class="nav-btn" href="/user/{{request.session.user}}"><b>Profile</b></a><!-- 
+            --><a class="nav-btn" href="/site/add"><b>Add Site</b></a><!-- 
+            --><a class="nav-btn" href="/process_logout"><b>Logout</b></a><!-- 
+            -->{%else%}<!-- 
+            --><a class="nav-btn" href="/login"><b>Login</b></a><!-- 
+            --><a class="nav-btn" href="/login"><b>Register</b></a><!-- 
+            -->
+            {%endif%}
+        </div>
     </div>
 
-    <div style="display:inline-block;vertical-align:top;text-align:right">
-        <p>Name:</p>
-        <p>Latitude:</p>
-        <p>Longitude:</p>
-        <p>Max Nights:</p>
-        <p>Number of Sites:</p>
-        <p>Max RV Length:</p>
-        <p>Worst Road Conditions:</p>
-        <p>Uploaded By:</p>
-    </div><!--
-    --><div style="display:inline-block;vertical-align:top;margin-left:10px;">
-        <p>{{ campsite.name }}</p>
-        <p id="site-latitude" value='{{ campsite.latitude }}'>{{ campsite.latitude }}</p>
-        <p id="site-longitude" value='{{ campsite.longitude }}'>{{ campsite.longitude }}</p>
-        <p>{{ campsite.max_nights }}</p>
-        <p>{{ campsite.number_of_sites }}</p>
-        <p>{{ campsite.rv_length }}</p>
-        <p>{{ campsite.road_conditions }}</p>
-        <p>{{ campsite.uploader.username }}</p>
+    <div id="container">
+        <div id='site-info-frame'>
+            <div id="site-titles">
+                <p>Name:</p>
+                <p>Latitude:</p>
+                <p>Longitude:</p>
+                <p>Max Nights:</p>
+                <p>Number of Sites:</p>
+                <p>Max RV Length:</p>
+                <p>Worst Road Conditions:</p>
+                <p>Uploaded By:</p>
+            </div><!--
+            --><div id="site-info">
+                <p>{{ campsite.name }}</p>
+                <p id="site-latitude" value='{{ campsite.latitude }}'>{{ campsite.latitude }}</p>
+                <p id="site-longitude" value='{{ campsite.longitude }}'>{{ campsite.longitude }}</p>
+                <p>{{ campsite.max_nights }}</p>
+                <p>{{ campsite.number_of_sites }}</p>
+                <p>{{ campsite.rv_length }}</p>
+                <p>{{ campsite.road_conditions }}</p>
+                <p>{{ campsite.uploader.name }}</p>
+            </div>
+            <div id="site-description">
+                <h3>Description:</h3>
+                <p>{{campsite.description}}</p>
+            </div>
+        </div>
+        <div id="map" class="site-map"></div>
+        <div id='site-info-frame'>
+            <div id="site-services">
+                <h3>Services</h3>
+                {% for service in services %}
+                <p>{{ service.name }}</p>
+                {% endfor %}
+            </div>
+            <div id="site-activities">
+                <h3>Activities</h3>
+                {% for activity in activities %}
+                <p>{{ activity.name }}</p>
+                {% endfor %}
+            </div>
+            <div id="weatherdiv"></div>
+        </div>
     </div>
-    <div id="map" style="height: 500px; width:500px; display:inline-block"></div>
-    <div>
-        <h3>Services</h3>
-        {% for service in services %}
-        <p>{{ service.name }}</p>
-        {% endfor %}
-    </div>
-    <div>
-        <h3>Activities</h3>
-        {% for activity in activities %}
-        <p>{{ activity.name }}</p>
-        {% endfor %}
-    </div>
-    <div id="weatherdiv"></div>
+
 </body>
 
 </html>

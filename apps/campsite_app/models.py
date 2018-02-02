@@ -28,6 +28,8 @@ class CampsiteManager(models.Manager):
             errors['city'] = "City name must be 2 or more characters"
         if len(postData['zip']) != 5:
             errors['zip'] = "Zip codes must be 5 digits"
+        if len(postData['state']) < 2:
+            errors['state'] = 'State names must be 2 or more characters'
         if len(postData['country']) < 4:
             errors['country'] = "Country names must be 4 or more characters"
         try:
@@ -46,7 +48,7 @@ class CampsiteManager(models.Manager):
     def create_campsite(self, postData):
         name = postData['name']
         uploader = User.objects.get(id=int(postData['uploader']))
-        address = postData['street'] + ";" + postData['city'] + ";" + postData['zip'] + ";" + postData['country']
+        address = postData['street'] + ";" + postData['city'] + ";" + postData['zip'] + ";" + postData['state'] + ";" + postData['country']
         latitude = float(postData['latitude'])
         longitude = float(postData['longitude'])
         description = postData['description']
@@ -56,7 +58,6 @@ class CampsiteManager(models.Manager):
             max_nights = "No max"
         else:
             max_nights = postData['max_nights']
-        max_nights = postData['max_nights']
         number_of_sites = postData['number_of_sites']
         rv_length = postData['rv_length']
         road_conditions = postData['road_conditions']

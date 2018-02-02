@@ -4,7 +4,7 @@
 <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
-    <title>{{user.name}}'s profile</title>
+    <title>About Us</title>
         {%load static%}
         <link rel="stylesheet" href="{% static 'campsite_app/css/site_add.css'%}">
     </head>
@@ -29,17 +29,10 @@
         </div>
 
         <div id="container" class="login_container">
-        
-            <div style="display:inline-block;vertical-align:top;text-align:right">
-                <p>Name:</p>
-                <p>Username:</p>
-                <p>Email:</p>
-            </div><!--
-            --><div style="display:inline-block;vertical-align:top;margin-left:10px;">
-                <p>{{ user.name }}</p>
-                <p>{{ user.username }}</p>
-                <p>{{ user.email }}</p>
-            </div>
+            <h2>About Us</h2>
+            <p>This is a community of camping enthusiests that don't like having to pay to sleep outside. So we created a platfrom to share our ideas, experiences and favorite places for camping for free.</p>
+
+            
         </div>
     </body>
 </html>

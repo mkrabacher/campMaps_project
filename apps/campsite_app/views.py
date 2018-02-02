@@ -21,6 +21,12 @@ def user(request):
     }
     return render(request, 'campsite_app/user.html', context)
 
+def about(request):
+    context = {
+        'users': User.objects.all()
+    }
+    return render(request, 'campsite_app/about.html', context)
+
 def user_id(request, id):
     try: 
         user = User.objects.get(id=id)

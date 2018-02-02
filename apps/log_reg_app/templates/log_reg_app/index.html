@@ -1,10 +1,22 @@
+<!DOCTYPE html>
 <html>
-    <head>
+
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Register and Login</title>
         {%load static%}
         <link rel="stylesheet" href="{% static 'campsite_app/css/site_add.css'%}">
     </head>
     <body>
-        <script src="{% static 'log_reg_app/js/facebookSDK.js' %}" alt="FBSDK"></script>
+        <!-- <div id="fb-root"></div>
+        <script>(function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.12&appId=1987964941523204';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script> -->
         <div id="navbar">
             <h1>BivyMaps</h1><!-- 
             --><img id="nav-image" src="/static/campsite_app/images/campIcon.png" alt="campIcon"><!-- 
@@ -61,6 +73,7 @@
                 <input type="password" name="password"><br>
                 <input type="submit" value="Login" style="margin-top:5px;">
             </form>
+            <!-- <div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div> -->
         </div>
     </body>
 </html>

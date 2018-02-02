@@ -51,7 +51,7 @@ function initMap() {
     setTimeout(() => {
         var markerCluster = new MarkerClusterer(map, markers,
             { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
-    }, 200);
+    }, 500);
     // console.log('markers')
     // console.dir(markers)
 };

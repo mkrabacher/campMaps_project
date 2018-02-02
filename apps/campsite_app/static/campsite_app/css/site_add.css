@@ -4,9 +4,40 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
+body {
+    background: -webkit-linear-gradient(bottom, rgba(122,188,255,1) 0%,rgba(96,171,248,1) 50%,rgba(64,150,238,1) 100%); 
+    /* background-color: rgb(3, 39, 3) */
+}
+
+h1 {
+    display: inline-block;
+    vertical-align: top;
+    margin: 5px 0 0 10px;
+    color: rgba(0,0,0,0.6);
+    text-shadow: 5px 6px 6px rgba(0,0,0,0.2),
+                     0px -5px 35px rgba(255,255,255,0.3);
+}
+
+h3 {
+    color: rgb(172, 92, 36)
+}
+
+#container {
+    max-width: 1200px;
+}
+
+/* ++++++++++++++++++++++++++NAVBAR++++++++++++++++++++++++++++++++
+*/
 #navbar {
     background-color: rgb(172, 92, 36);
     height: 50px;
+}
+
+#nav-btns-wrapper {
+    display: inline-block;
+    vertical-align: top;
+    float: right;
+    border-right: 2px solid rgb(83, 37, 2);
 }
 
 .nav-btn {
@@ -14,7 +45,7 @@
     line-height: 50px;
     vertical-align: top;
     padding: 0px 10px;
-    border-right: 2px solid rgb(83, 37, 2);
+    border-left: 2px solid rgb(83, 37, 2);
     text-decoration: none;
     color: rgb(9, 77, 12);
 }
@@ -24,8 +55,71 @@
 }
 
 #nav-image {
-    border-right: 2px solid rgb(83, 37, 2);
     padding: 0px 5px 5px;
+}
+
+/* ++++++++++++++++++++++++++MAP++++++++++++++++++++++++++++++++
+Always set the map height explicitly to define the size of the div
+* element that contains the map. */
+.map {
+    height: 54vh;
+    width: 96%;
+    margin: 20px;
+    display: inline-block;
+    border-radius: 5px
+}
+
+/* ++++++++++++++++++++++++++HOME++++++++++++++++++++++++++++++++
+*/
+#results {
+    margin: 0 10%;
+    min-width: 600px;
+    height: 32.5vh;
+    min-height: 200px;
+    overflow-y: scroll;
+}
+
+.result {
+    margin: 5px 0 0;
+    padding: 5px;
+    background-color: rgb(199, 157, 101);
+    border-radius: 5px
+}
+
+/* ++++++++++++++++++++++++++ABOUT++++++++++++++++++++++++++++++++
+*/
+
+
+/* ++++++++++++++++++++++++++PROFILE++++++++++++++++++++++++++++++++
+*/
+
+
+/* ++++++++++++++++++++++++++SITE++++++++++++++++++++++++++++++++
+*/
+#weatherdiv div{
+    display: inline-block;
+    vertical-align: top;
+}
+
+#weatherdiv p{
+
+}
+
+#weatherdiv img{
+
+}
+
+
+/* ++++++++++++++++++++++++++ADD SITE PAGE++++++++++++++++++++++++++++++++
+*/
+.map-addpage {
+    height: 54vh;
+    width: 500px;
+    margin: 20px;
+    display: inline-block;
+    border-radius: 5px;
+    width: 100%;
+    margin: 0;
 }
 
 #campform {
@@ -39,25 +133,28 @@
 #campform_left {
     display: inline-block;
     vertical-align: top;
-    width:50%;
-    height: 282px;
+    padding: 5px;
+    width:28%;
+    margin: 8px;
+    background-color: rgb(199, 157, 101);
+    border-radius: 5px
 }
 
 #campform_right {
     display: inline-block;
+    padding: 5px;
     vertical-align: top;
-    width:50%;
-    height: 282px;
+    width:68%;
 }
 
-#campform_bottom_left {
+#campform_services {
     display: inline-block;
     vertical-align: top;
     width:50%;
     background-color: lightblue;
 }
 
-#campform_bottom_right {
+#campform_activities {
     display: inline-block;
     vertical-align: top;
     width:50%;
@@ -68,38 +165,5 @@
     margin-top: 5px;
 }
 
-/* Always set the map height explicitly to define the size of the div
-    * element that contains the map. */
 
-#map {
-    height: 500px;
-    width: 500px;
-    margin: 20px;
-    display: inline-block;
-}
 
-.pac-controls {
-    display: inline-block;
-    padding: 5px 11px;
-}
-
-.pac-controls label {
-    font-family: Roboto;
-    font-size: 13px;
-    font-weight: 300;
-}
-
-#pac-input {
-    background-color: #fff;
-    font-family: Roboto;
-    font-size: 15px;
-    font-weight: 300;
-    margin-left: 12px;
-    padding: 0 11px 0 13px;
-    text-overflow: ellipsis;
-    width: 400px;
-}
-
-#pac-input:focus {
-    border-color: #4d90fe;
-}

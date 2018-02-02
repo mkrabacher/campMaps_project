@@ -40,11 +40,21 @@
         <p>Name:</p>
         <p>Latitude:</p>
         <p>Longitude:</p>
+        <p>Max Nights:</p>
+        <p>Number of Sites:</p>
+        <p>Max RV Length:</p>
+        <p>Worst Road Conditions:</p>
+        <p>Uploaded By:</p>
     </div><!--
     --><div style="display:inline-block;vertical-align:top;margin-left:10px;">
         <p>{{ campsite.name }}</p>
         <p id="site-latitude" value='{{ campsite.latitude }}'>{{ campsite.latitude }}</p>
         <p id="site-longitude" value='{{ campsite.longitude }}'>{{ campsite.longitude }}</p>
+        <p>{{ campsite.max_nights }}</p>
+        <p>{{ campsite.number_of_sites }}</p>
+        <p>{{ campsite.rv_length }}</p>
+        <p>{{ campsite.road_conditions }}</p>
+        <p>{{ campsite.uploader.username }}</p>
     </div>
     <div id="map" style="height: 500px; width:500px; display:inline-block"></div>
     <div>

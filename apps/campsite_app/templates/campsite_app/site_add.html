@@ -14,53 +14,33 @@
 
 <body>
     <div id="navbar">
-        <h1>BivyMaps</h1>
-        <!-- 
-        -->
-        <img id="nav-image" src="/static/campsite_app/images/campIcon.png" alt="campIcon">
-        <!-- 
-        -->
-        <div id="nav-btns-wrapper">
+        <h1>BivyMaps</h1><!-- 
+        --><img id="nav-image" src="/static/campsite_app/images/campIcon.png" alt="campIcon"><!-- 
+        --><div id="nav-btns-wrapper">
             <a class="nav-btn" href="/">
                 <b>Home</b>
-            </a>
-            <!-- 
-            -->
-            <a class="nav-btn" href="/about">
+            </a><!-- 
+            --><a class="nav-btn" href="/about">
                 <b>About</b>
-            </a>
-            <!-- 
-            -->{%if request.session.user%}
-            <!-- 
-            -->
-            <a class="nav-btn" href="/user/{{request.session.user}}">
+            </a><!-- 
+            -->{%if request.session.user%}<!-- 
+            --><a class="nav-btn" href="/user/{{request.session.user}}">
                 <b>Profile</b>
-            </a>
-            <!-- 
-            -->
-            <a class="nav-btn" href="/site/add">
+            </a><!-- 
+            --><a class="nav-btn" href="/site/add">
                 <b>Add Site</b>
-            </a>
-            <!-- 
-            -->
-            <a class="nav-btn" href="/process_logout">
+            </a><!-- 
+            --><a class="nav-btn" href="/process_logout">
                 <b>Logout</b>
-            </a>
-            <!-- 
-            -->{%else%}
-            <!-- 
-            -->
-            <a class="nav-btn" href="/login">
+            </a><!-- 
+            -->{%else%}<!-- 
+            --><a class="nav-btn" href="/login">
                 <b>Login</b>
-            </a>
-            <!-- 
-            -->
-            <a class="nav-btn" href="/login">
+            </a><!-- 
+            --><a class="nav-btn" href="/login">
                 <b>Register</b>
-            </a>
-            <!-- 
-            -->
-            {%endif%}
+            </a><!-- 
+            -->{%endif%}
         </div>
     </div>
 
@@ -168,29 +148,33 @@
                 <div id="map" class="map-addpage"></div>
                 <label for="description">Description:</label>
                 <br>
-                <textarea name="description" cols="87" rows="8"></textarea>
+                <textarea name="description" cols="94" rows="8"></textarea>
                 <br>
             </div>
             <div id="campform_services">
                 <h3>Services</h3>
                 {% for service in services %}
-                <input type="hidden" name="service_{{service.id}}" value="off">
-                <input type="checkbox" name="service_{{service.id}}">
-                <label for="service_{{service.id}}">{{service.name}}</label>
+                <div class="cb">
+                    <input type="hidden" name="service_{{service.id}}" value="off">
+                    <input type="checkbox" name="service_{{service.id}}">
+                    <label for="service_{{service.id}}">{{service.name}}</label>
+                </div>
                 {% endfor %}
             </div><!-- 
              --><div id="campform_activities">
                 <h3>Activities</h3>
                 {% for activity in activities %}
-                <input type="hidden" name="activity_{{activity.id}}" value="off">
-                <input type="checkbox" name="activity_{{activity.id}}">
-                <label for="activity_{{activity.id}}">{{activity.name}}</label>
+                <div class="cb">
+                    <input type="hidden" name="activity_{{activity.id}}" value="off">
+                    <input type="checkbox" name="activity_{{activity.id}}">
+                    <label for="activity_{{activity.id}}">{{activity.name}}</label>
+                </div>
                 {% endfor %}
                 <br>
             </div>
 
             <br>
-            <input type="submit" value="Submit Campsite" id="campform_submit">
+            <input type="submit" value="Add Campsite" id="campform_submit">
         </form>
     </div>
 </body>

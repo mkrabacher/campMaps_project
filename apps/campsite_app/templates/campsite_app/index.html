@@ -32,32 +32,35 @@
             {%endif%}
         </div>
     </div>
+    <div id="container">
 
-    <div id="map" class="map"></div>
+        <div id="map" class="map"></div>
 
-    <h3 style="margin: 0 10%">Results:</h3>
-    <div id="results">
-        {%for site in sites%}
-        <div class="result">
-            <a href='/site/{{site.id}}' class="home-siteName">{{site.name}}</a>
-            <p class='home-siteDescription'>
-                {{site.description}} <br>
-                Access: {{site.road_condition}}
-            </p>
-            <p class='home-siteServices'>
-                Services: 
-                {%for service in site.services.all%}
-                {{service.name}}
-                {%endfor%}
-            </p>
-            <p class='home-siteServices'>
-                Activities: 
-                {%for activity in site.activities.all%}
-                {{activity.name}}
-                {%endfor%}
-            </p>
+        <h3 style="margin: 0 10%">Results:</h3>
+        <div id="results">
+            {%for site in sites%}
+            <div class="result">
+                <a href='/site/{{site.id}}' class="home-siteName">{{site.name}}</a>
+                <p class='home-siteDescription'>
+                    {{site.description}} <br>
+                    Access: {{site.road_conditions}}
+                </p>
+                <p class='home-siteServices'>
+                    Services: 
+                    {%for service in site.services.all%}
+                    {{service.name}}
+                    {%endfor%}
+                </p>
+                <p class='home-siteServices'>
+                    Activities: 
+                    {%for activity in site.activities.all%}
+                    {{activity.name}}
+                    {%endfor%}
+                </p>
+            </div>
+            {%endfor%}
         </div>
-        {%endfor%}
+        
     </div>
 </body>
 

@@ -9,7 +9,6 @@
     {%load static%}
     <link rel="stylesheet" href="{% static 'campsite_app/css/site_add.css'%}">
     <script src="{% static 'campsite_app/js/siteMap.js' %}" alt="map"></script>
-    <!-- <script src="{% static 'js/weather.js' %}" alt="weather"></script> -->
     <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCXR-DhGmrWqToo99WqiqgT26gabtvvO4&callback=initMap"></script>
     <script>
@@ -81,7 +80,9 @@
                 <p>{{ activity.name }}</p>
                 {% endfor %}
             </div>
-            <div id="weatherdiv"></div>
+            <div id="weatherdiv">
+                <h3>Local Weather</h3>
+            </div>
         </div>
     </div>
 

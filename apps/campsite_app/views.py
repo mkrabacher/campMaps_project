@@ -30,8 +30,10 @@ def about(request):
 def user_id(request, id):
     try: 
         user = User.objects.get(id=id)
+        sites = Campsite.objects.filter(uploader=user)
         context = {
-            'user': user
+            'user': user,
+            'sites': sites
         }
         return render(request, 'campsite_app/user_id.html', context)
     except:

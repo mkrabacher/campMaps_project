@@ -28,7 +28,7 @@
             </div>
         </div>
 
-        <div id="container" class="login_container">
+        <div class="container" id="login_container">
         
             <div style="display:inline-block;vertical-align:top;text-align:right">
                 <p>Name:</p>
@@ -39,6 +39,29 @@
                 <p>{{ user.name }}</p>
                 <p>{{ user.username }}</p>
                 <p>{{ user.email }}</p>
+            </div>
+            <div>
+                {%for site in sites%}
+                <div class="result">
+                    <a href='/site/{{site.id}}' class="home-siteName">{{site.name}}</a>
+                    <p class='home-siteDescription'>
+                        {{site.description}} <br>
+                        Access: {{site.road_conditions}}
+                    </p>
+                    <p class='home-siteServices'>
+                        Services: 
+                        {%for service in site.services.all%}
+                        {{service.name}}
+                        {%endfor%}
+                    </p>
+                    <p class='home-siteServices'>
+                        Activities: 
+                        {%for activity in site.activities.all%}
+                        {{activity.name}}
+                        {%endfor%}
+                    </p>
+                </div>
+                {%endfor%}
             </div>
         </div>
     </body>

@@ -22,9 +22,10 @@ h3 {
     color: rgb(172, 92, 36)
 }
 
-#container {
+.container {
     width: 1100px;
     margin: auto;
+    min-height: 95vh
 }
 
 /* ++++++++++++++++++++++++++NAVBAR++++++++++++++++++++++++++++++++
@@ -97,8 +98,21 @@ Always set the map height explicitly to define the size of the div
 
 /* ++++++++++++++++++++++++++LOGIN++++++++++++++++++++++++++++++++
 */
-.login_container {
-    padding: 20% 30%;
+#logo {
+    font-size: 100px;
+    margin-bottom: 50px
+}
+
+#head-image {
+    height: 100px;
+    position: relative;
+    top: 15px;
+    left: 15px
+}
+
+#login_container {
+    margin: 12% 30% 17%;
+    min-height: 52vh
 }
 
 #login-box, #reg-box {
@@ -141,7 +155,7 @@ Always set the map height explicitly to define the size of the div
 #site-titles {
     display:inline-block;
     vertical-align:top;
-    text-align:left
+    text-align:left;
 }
 
 #site-info {

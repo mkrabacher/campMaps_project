@@ -153,29 +153,57 @@ Always set the map height explicitly to define the size of the div
 #site-services {
     display: inline-block;
     vertical-align: top;
+    width: 300px;
+    border: 2px solid  rgb(172, 92, 36);
+    border-radius: 5px
 }
 
 #site-activities {
     display: inline-block;
     vertical-align: top;
+    width: 300px;
+    border: 2px solid  rgb(172, 92, 36);
+    border-radius: 5px;
+    margin: 0 60px
+}
+
+#site-services p, #site-activities p {
+    width: 140px;
+    display: inline-block;
+    text-align: center
 }
 
 #weatherdiv{
     display: inline-block;
     vertical-align: top;
+    border: 2px solid  rgb(172, 92, 36);
+    border-radius: 5px;
+    width: 335px;
+}
+
+#weatherdiv h3, #site-activities h3, #site-services h3{
+    text-align: center
 }
 
 #weatherdiv div{
     display: inline-block;
     vertical-align: top;
+    margin: 7px;
 }
 
 #weatherdiv p{
+    text-align: center;
+}
 
+#weatherdiv h4{
+    text-align: center;
+    color: rgb(172, 92, 36);
 }
 
 #weatherdiv img{
-
+    border: 2px solid  rgb(172, 92, 36);
+    border-radius: 5px;
+    im: auto
 }
 
 

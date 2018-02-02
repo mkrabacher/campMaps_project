@@ -5,30 +5,36 @@
     </head>
     <body>
         <div id="navbar">
-            <img id="nav-image" src="/static/campsite_app/images/campIcon.png" alt="campIcon"><!-- 
-            --><a class="nav-btn" href="/"><b>Home</b></a><!-- 
-            --><a class="nav-btn" href="/about"><b>About</b></a><!-- 
-            -->{%if request.session.user%}<!-- 
-            --><a class="nav-btn" href="/user/{{request.session.user}}"><b>Profile</b></a><!-- 
-            --><a class="nav-btn" href="/site/add"><b>Add Site</b></a><!-- 
-            --><a class="nav-btn" href="/process_logout"><b>Logout</b></a><!-- 
-            -->{%else%}<!-- 
-            --><a class="nav-btn" href="/login"><b>Login</b></a><!-- 
-            --><a class="nav-btn" href="/login"><b>Register</b></a><!-- 
+            <h1>BivyMaps</h1><!-- 
+            --><img id="nav-image" src="/static/campsite_app/images/campIcon.png" alt="campIcon"><!-- 
             -->
-            {%endif%}
+            <div id="nav-btns-wrapper">
+                <a class="nav-btn" href="/"><b>Home</b></a><!-- 
+                --><a class="nav-btn" href="/about"><b>About</b></a><!-- 
+                -->{%if request.session.user%}<!-- 
+                --><a class="nav-btn" href="/user/{{request.session.user}}"><b>Profile</b></a><!-- 
+                --><a class="nav-btn" href="/site/add"><b>Add Site</b></a><!-- 
+                --><a class="nav-btn" href="/process_logout"><b>Logout</b></a><!-- 
+                -->{%else%}<!-- 
+                --><a class="nav-btn" href="/login"><b>Login</b></a><!-- 
+                --><a class="nav-btn" href="/login"><b>Register</b></a><!-- 
+                -->
+                {%endif%}
+            </div>
         </div>
+
+        <div id="container" class="login_container">
         
-        <div style="display:inline-block;vertical-align:top;text-align:right">
-            <p>Name:</p>
-            <p>Username:</p>
-            <p>Email:</p>
-        </div><!--
-        --><div style="display:inline-block;vertical-align:top;margin-left:10px;">
-            <p>{{ user.name }}</p>
-            <p>{{ user.username }}</p>
-            <p>{{ user.email }}</p>
+            <div style="display:inline-block;vertical-align:top;text-align:right">
+                <p>Name:</p>
+                <p>Username:</p>
+                <p>Email:</p>
+            </div><!--
+            --><div style="display:inline-block;vertical-align:top;margin-left:10px;">
+                <p>{{ user.name }}</p>
+                <p>{{ user.username }}</p>
+                <p>{{ user.email }}</p>
+            </div>
         </div>
-        
     </body>
 </html>

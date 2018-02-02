@@ -6,7 +6,6 @@ function initMap() {
         lat: parseFloat($("#site-latitude").html()),
         lng: parseFloat($("#site-longitude").html()),
     };
-    console.log(pos);
     //createing a new map object
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 9,

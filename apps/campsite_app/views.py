@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.core import serializers
 from models import *
 from ..log_reg_app.models import *
+import requests
 
 # Create your views here.
 def index(request):
@@ -61,6 +62,15 @@ def site_id(request, id):
             'activities': activities
         }
     return render(request, 'campsite_app/site_id.html', context)
+
+def get_weather(request, latlng):
+    print 'latlng below'
+    print latlng
+    url = "https://api.darksky.net/forecast/6f2ceccdc4c5425df7336b58b16618bd/" + latlng
+    response = requests.get(url).content
+    print 'response below'
+    print response
+    return HttpResponse(response, content_type='application/json')
 
 def site_add(request):
     if 'user' in request.session:

@@ -21,7 +21,7 @@ $(document).ready(function () {
                 var desc = daily_forecast['data'][i]['icon']
             }
             icon = daily_forecast['data'][i]['icon']
-            $('#weatherdiv').append('<div><h4>' + week_arr[day_int] + '</h4><img src="/static/campsite_app/images/' + daily_forecast['data'][i]['icon'] + '.png" alt="' + daily_forecast['data'][i]['icon'] + '"><p>' + desc + '</p></div>')
+            $('#weatherdiv').append('<div><h4>' + week_arr[day_int] + '</h4><img src="/static/campsite_app/images/' + daily_forecast['data'][i]['icon'] + '.png" alt="' + daily_forecast['data'][i]['icon'] + '"><p>' + desc + '</p><p>&uarr;' + daily_forecast['data'][i]['temperatureHigh'] + '&deg;</p><p>&darr;' + daily_forecast['data'][i]['temperatureLow'] + '&deg;</p></div>')
             day_int++
             if (day_int > 6) {
                 day_int = 0;

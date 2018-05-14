@@ -123,10 +123,14 @@ function setMarkers(map) {
         marker.addListener('click', function () {
             var myLat, myLng
             if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function (position) {
-                    myLat = position.coords.latitude,
-                        myLng = position.coords.longitude
-                });
+                // // disabled due to non-https status of deployment. enable this once you have an https site.
+                // navigator.geolocation.getCurrentPosition(function (position) {
+                //     myLat = position.coords.latitude,
+                //     myLng = position.coords.longitude
+                // });
+                // // disable the below when you have an https site.
+                myLat = 47
+                myLng = -122
                 setTimeout(() => {
                     contentString = '<div><b><a href="/site/' + loc[4] + '">' + loc[0] + '</a></b></div><div>' + loc[3] + '</div><div><a target="blank_" href="https://www.google.com/maps/dir/?api=1&origin=' + myLat + ',' + myLng + '&destination=' + loc[1] + ',' + loc[2] + '&z=10&t=h&hl=en-US&gl=US&mapclient=apiv3">Get Directions</a>'
 

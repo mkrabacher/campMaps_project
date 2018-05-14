@@ -4,13 +4,17 @@ var map
 function initMap() {
 
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function (position) {
-            var pos = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
-            };
-            map.setCenter(pos);
-        });
+        // // disabled due to non-https status of deployment. enable this once you have an https site.
+        // navigator.geolocation.getCurrentPosition(function (position) {
+        //     var pos = {
+        //         lat: position.coords.latitude,
+        //         lng: position.coords.longitude
+        //     };
+        //     map.setCenter(pos);
+        // // disable the below when you have an https site.
+        myLat = 47
+        myLng = -122
+        map.setCenter(pos);
         //createing a new map object
         map = new google.maps.Map(document.getElementById('map'), {
             zoom: 10,

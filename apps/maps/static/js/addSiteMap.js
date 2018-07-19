@@ -4,30 +4,33 @@ var map
 function initMap() {
 
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function (position) {
-            var pos = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
-            };
-            map.setCenter(pos);
-        });
+        // // disabled due to non-https status of deployment. enable this once you have an https site.
+        // navigator.geolocation.getCurrentPosition(function (position) {
+        //     var pos = {
+        //         lat: position.coords.latitude,
+        //         lng: position.coords.longitude
+        //     };
+        //     map.setCenter(pos);
+        // // disable the below when you have an https site.
+        var pos = { lat: 46.0, lng: -100.0 }
+
         //createing a new map object
         map = new google.maps.Map(document.getElementById('map'), {
             zoom: 10,
             center: pos
         });
-
+        map.setCenter(pos);
     } else {
         // if browser doesn't support Geolocation
         // this is currently not working. not neccessarily the below code but something to do with this if statement and how the google maps object works.
         var pos = { lat: 46.0, lng: -100.0 }
 
-        map.setCenter(pos);
         //createing a new map object
         map = new google.maps.Map(document.getElementById('map'), {
             center: { lat: -34.397, lng: 150.644 },
             zoom: 4,
         });
+        map.setCenter(pos);
     }
 
 

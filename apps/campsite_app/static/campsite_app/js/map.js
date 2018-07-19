@@ -12,31 +12,25 @@ function initMap() {
         //     };
         //     map.setCenter(pos);
         // // disable the below when you have an https site.
-        myLat = 47
-        myLng = -122
         var pos = { lat: 46.0, lng: -100.0 }
-        map.setCenter(pos);
+
         //createing a new map object
         map = new google.maps.Map(document.getElementById('map'), {
             zoom: 10,
             center: pos
         });
-
+        map.setCenter(pos);
     } else {
         // if browser doesn't support Geolocation
         // this is currently not working. not neccessarily the below code but something to do with this if statement and how the google maps object works.
         var pos = { lat: 46.0, lng: -100.0 }
-        map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 10,
-            center: pos
-        });
 
-        map.setCenter(pos);
         //createing a new map object
         map = new google.maps.Map(document.getElementById('map'), {
             center: { lat: -34.397, lng: 150.644 },
             zoom: 4,
         });
+        map.setCenter(pos);
     }
 
 
